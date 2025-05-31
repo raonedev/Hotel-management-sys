@@ -26,7 +26,7 @@ const Navbar = () => {
           Rooms
         </Link>
         <Link
-          to="/room"
+          to="/chat"
           className="text-gray-200 hover:text-blue-400 transition duration-300 font-medium"
         >
           Chat

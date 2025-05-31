@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 
 const rooms = [
   {
@@ -101,6 +102,7 @@ const rooms = [
 
 
 const RoomBookingPage = () => {
+  const navigate = useNavigate();
   return (
       // Main container with dark background and text color
     <div className="min-h-screen bg-gray-950 text-gray-100 p-4 sm:p-8 font-inter">
@@ -137,7 +139,7 @@ const RoomBookingPage = () => {
               <p className="text-gray-300 text-sm mb-4 line-clamp-2">{room.description}</p>
               <button className="w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md
                                  hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75
-                                 transform hover:-translate-y-0.5 transition-all duration-300">
+                                 transform hover:-translate-y-0.5 transition-all duration-300" onClick={()=>{navigate('/booking');}}>
                 Book Now
               </button>
             </div>
