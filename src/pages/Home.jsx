@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css"; // Ensure Swiper's basic CSS is imported
@@ -80,11 +80,32 @@ const testimonials = [
 
 
 const Home = () => {
+   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    // Check for user role and redirect if admin
+    const userRole = localStorage.getItem("userRole");
+    console.log(`User Role: ${userRole}`); // Log the user role for debugging
+    if (userRole === "admin") {
+      // Redirect to AdminPanel screen
+      window.location.href = "/admin-panel"; // This will navigate the browser
+      return; // Stop further execution of this effect
+    }
+
+    // Check for JWT token to determine login status
+    const jwtToken = localStorage.getItem("jwtToken");
+    if (jwtToken) {
+      setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
+    }
+  }, []); // Empty dependency array means this effect runs once on mount
+
   return (
     // Main container with dark background and Inter font
     <div className="min-h-screen bg-gray-950 text-gray-100 font-inter">
       {/* Navbar component */}
-      <Navbar />
+     <Navbar isLoggedIn={isLoggedIn} />
 
       <main>
         {/* Hero Carousel Section */}

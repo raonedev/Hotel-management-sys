@@ -3,16 +3,20 @@ import HeroImage from "../../assets/Hero.png";
 import { Link } from "react-router-dom";
 
 const Signup = () => {
+  const [username, setUsername] = useState(""); // Added username state
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [errors, setErrors] = useState({});
   const [isAdmin, setIsAdmin] = useState(false);
+  const [errors, setErrors] = useState({});
+  const [apiMessage, setApiMessage] = useState(""); // State for API success/error messages
+  const [loading, setLoading] = useState(false); // State for loading indicator
 
-  const validate = () => {
+   const validate = () => {
     const newErrors = {};
     const emailRegex = /\S+@\S+\.\S+/;
 
+    if (!username) newErrors.username = "Username is required";
     if (!email) newErrors.email = "Email is required";
     else if (!emailRegex.test(email)) newErrors.email = "Email is invalid";
 
@@ -29,16 +33,51 @@ const Signup = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setApiMessage(""); // Clear previous API messages
     if (validate()) {
-      console.log("Signup successful:", { email, password });
-      // Proceed with signup logic
+      setLoading(true); // Set loading to true
+      try {
+        const role = isAdmin ? "admin" : "user";
+        const response = await fetch("http://localhost:3000/api/user/signup", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ username, email, password, role }),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          // Signup successful
+          console.log("Signup successful:", data);
+          setApiMessage("Signup successful! Redirecting to login...");
+          // Store JWT and role in local storage
+          localStorage.setItem("jwtToken", data.token);
+          localStorage.setItem("userRole", data.role);
+          // Optionally, redirect the user after a short delay
+          // setTimeout(() => {
+          //   window.location.href = "/login"; // Or use navigate from react-router-dom
+          // }, 1500);
+        } else {
+          // Signup failed
+          console.error("Signup failed:", data.message || "Something went wrong");
+          setApiMessage(data.message || "Signup failed. Please try again.");
+        }
+      } catch (error) {
+        console.error("Network error or API call failed:", error);
+        setApiMessage("Network error. Please check your connection.");
+      } finally {
+        setLoading(false); // Set loading to false
+      }
     }
   };
 
+
   return (
-     // Main container with dark background and Inter font
+    // Main container with dark background and Inter font
     <div className="flex flex-col md:flex-row w-full min-h-screen bg-gray-950 font-inter text-gray-100">
       {/* Left section for the hero image - hidden on small screens */}
       <div className="hidden md:block md:w-1/2">
@@ -46,16 +85,34 @@ const Signup = () => {
           src={HeroImage}
           alt="Signup Cover"
           className="w-full h-full object-cover rounded-r-2xl shadow-lg" // Added rounded corners and shadow
-          onError={(e) => { e.target.onerror = null; e.target.src="https://placehold.co/800x1000/1F2937/D1D5DB?text=Signup+Image+Not+Found"; }}
+          onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/800x1000/1F2937/D1D5DB?text=Signup+Image+Not+Found"; }}
         />
       </div>
 
-      {/* Right section for the signup form */}
+       {/* Right section for the signup form */}
       <div className="w-full md:w-1/2 flex items-center justify-center p-4 sm:p-8 lg:p-12">
         <form onSubmit={handleSubmit} className="w-full max-w-md space-y-6 bg-gray-800 p-8 rounded-2xl shadow-xl border border-gray-700">
           <div className="text-center mb-6">
             <h2 className="text-4xl font-extrabold text-white mb-2">Join Us!</h2>
             <p className="text-gray-400 text-lg">Create your new account</p>
+          </div>
+
+          {/* Username input field */}
+          <div>
+            <label className="block text-gray-300 text-left text-sm font-medium mb-2">Username</label>
+            <input
+              type="text"
+              className="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg text-gray-100
+                         focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500 transition duration-200"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder="Your username"
+            />
+            {errors.username && (
+              <p className="text-red-400 text-sm text-left mt-2">
+                {errors.username}
+              </p>
+            )}
           </div>
 
           {/* Email input field */}
@@ -113,7 +170,7 @@ const Signup = () => {
               </p>
             )}
           </div>
-           {/* Admin checkbox */}
+          {/* Admin checkbox */}
           <div className="flex items-center mt-4">
             <input
               type="checkbox"
@@ -127,6 +184,12 @@ const Signup = () => {
             </label>
           </div>
 
+          {/* API Message display */}
+          {apiMessage && (
+            <p className={`text-center text-sm mt-4 ${apiMessage.includes("successful") ? "text-green-400" : "text-red-400"}`}>
+              {apiMessage}
+            </p>
+          )}
 
           {/* Sign Up button */}
           <button
@@ -135,17 +198,20 @@ const Signup = () => {
                        bg-gradient-to-r from-blue-600 to-purple-600 shadow-lg
                        hover:from-blue-700 hover:to-purple-700 transition-all duration-300
                        focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75
-                       transform hover:-translate-y-0.5"
+                       transform hover:-translate-y-0.5
+                       disabled:opacity-50 disabled:cursor-not-allowed"
+            disabled={loading} // Disable button when loading
           >
-            Sign Up
+            {loading ? "Signing Up..." : "Sign Up"}
           </button>
 
           {/* Login link */}
           <p className="text-center text-sm text-gray-400 mt-4">
             Already have an account?{" "}
-            <Link to="/login" className="text-blue-400 hover:text-blue-300 underline font-medium transition duration-200">
+            {/* Replaced Link with a regular anchor tag for sandbox compatibility */}
+            <a href="/login" className="text-blue-400 hover:text-blue-300 underline font-medium transition duration-200">
               Login
-            </Link>
+            </a>
           </p>
         </form>
       </div>

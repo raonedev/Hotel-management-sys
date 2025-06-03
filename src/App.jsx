@@ -20,7 +20,6 @@ function App() {
         <Route path='/room' element={<RoomBookingPage/>}/>
         <Route path='/booking' element={<RoomBookingForm/>}/>
         <Route path='/chat' element={<AIChat/>}/>
-
       </Routes>
     </>
   )
