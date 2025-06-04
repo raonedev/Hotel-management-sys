@@ -6,6 +6,7 @@ import Login from './pages/auth/Login';
 import Signup from './pages/auth/SignUp';
 import RoomBookingPage from './pages/room/RoomBookingPage';
 import RoomBookingForm from './pages/booking/RoomBookingForm';
+import RoomDetailScreen from './pages/room/RoomDetailScreen';
 import AIChat from './pages/chatbot/AIChat';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <Route path='/signup' element={<Signup/>}/>
         <Route path='/' element={<Home/>}/>
         <Route path='/room' element={<RoomBookingPage/>}/>
+        <Route path='/room/:id' element={<RoomDetailScreen/>}/>
         <Route path='/booking' element={<RoomBookingForm/>}/>
         <Route path='/chat' element={<AIChat/>}/>
       </Routes>
