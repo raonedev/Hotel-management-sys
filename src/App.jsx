@@ -20,7 +20,7 @@ function App() {
         <Route path='/' element={<Home/>}/>
         <Route path='/room' element={<RoomBookingPage/>}/>
         <Route path='/room/:id' element={<RoomDetailScreen/>}/>
-        <Route path='/booking' element={<RoomBookingForm/>}/>
+        <Route path='/booking/:id' element={<RoomBookingForm/>}/>
         <Route path='/chat' element={<AIChat/>}/>
       </Routes>
     </>

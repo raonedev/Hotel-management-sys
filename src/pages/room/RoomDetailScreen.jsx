@@ -170,7 +170,9 @@ const RoomDetailScreen = () => {
 
         <button className="mt-8 w-full bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md
                            hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75
-                           transform hover:-translate-y-0.5 transition-all duration-300 text-xl">
+                           transform hover:-translate-y-0.5 transition-all duration-300 text-xl"
+                           onClick={() => navigate(`/booking/${id}`)}
+                           >
           Proceed to Booking
         </button>
       </div>
