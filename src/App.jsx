@@ -16,6 +16,7 @@ import Employees from './pages/admin/Employees';
 import Salaries from './pages/admin/Salaries';
 import AddEmployee from './pages/admin/AddEmployee';
 import AddSalary from './pages/admin/AddSalary';
+import AddRoom from './pages/admin/AddRoom';
 
 function App() {
 
@@ -34,7 +35,11 @@ function App() {
         {/* Admin Routes */}
         <Route path="/admin" element={<Dashboard />} />
         <Route path="/admin/bookings" element={<Bookings />} />
-        <Route path="/admin/rooms" element={<Rooms />} />
+
+
+        <Route path="/admin/rooms" element={<Rooms />} /> {/* Route for viewing all rooms */}
+        <Route path="/admin/rooms/add" element={<AddRoom />} /> {/* NEW Route for adding new room */}
+        <Route path="/admin/rooms/edit/:id" element={<AddRoom />} /> {/* NEW Route for editing existing room */}
         
         <Route path="/admin/employees" element={<Employees />} />
         <Route path="/admin/employees/add" element={<AddEmployee />}/>

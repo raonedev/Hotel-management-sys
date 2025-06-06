@@ -116,21 +116,7 @@ const Booking = () => {
                           Booked on: {format(parseISO(booking.createdAt), 'PPP p')}
                         </p>
                       </div>
-                      {/* Example Action Buttons */}
-                      <div className="flex justify-end space-x-3 mt-6">
-                        <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-colors duration-200">
-                          View Details
-                        </button>
-                        {/* Example conditional button based on status */}
-                        {booking.bookingStatus === 'Confirmed' && (
-                          <button className="bg-yellow-600 hover:bg-yellow-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-colors duration-200">
-                            Edit
-                          </button>
-                        )}
-                        <button className="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-colors duration-200">
-                          Cancel
-                        </button>
-                      </div>
+                      
                     </div>
                   ))}
                 </div>
