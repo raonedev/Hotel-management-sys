@@ -1,8 +1,12 @@
+// src/components/admin/EmployeeCard.jsx
 import React from 'react';
 import { format, parseISO } from 'date-fns';
+import { useNavigate } from 'react-router-dom';
 
-const EmployeeCard = ({ employee }) => {
- const getStatusColor = (status) => {
+const EmployeeCard = ({ employee, onDelete }) => {
+  const navigate = useNavigate();
+
+  const getStatusColor = (status) => {
     switch (status) {
       case "Active":
         return "text-green-500";
@@ -14,6 +18,8 @@ const EmployeeCard = ({ employee }) => {
         return "text-gray-400";
     }
   };
+
+  const salary = employee.salary || 0; // Safely get salary value
 
   return (
     <div className="bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-700 flex flex-col transform hover:scale-102 transition-all duration-300 ease-in-out">
@@ -28,7 +34,7 @@ const EmployeeCard = ({ employee }) => {
         <span className="font-semibold text-white">Phone:</span> {employee.phoneNumber}
       </p>
       <p className="text-gray-300 mb-1">
-        <span className="font-semibold text-white">Salary:</span> ₹{employee.salary.toLocaleString('en-IN')}
+        <span className="font-semibold text-white">Salary:</span> ₹{salary.toLocaleString('en-IN')}
       </p>
       <p className="text-gray-300 mb-1">
         <span className="font-semibold text-white">Status:</span>{" "}
@@ -51,13 +57,22 @@ const EmployeeCard = ({ employee }) => {
 
       {/* Action Buttons */}
       <div className="mt-auto flex justify-end space-x-3">
-        <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-colors duration-200">
-          View
+        <button
+          onClick={() => navigate(`/admin/salaries/add?employeeId=${employee._id}&employeeName=${encodeURIComponent(employee.firstName + ' ' + employee.lastName)}`)}
+          className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-colors duration-200"
+        >
+          Add Salary
         </button>
-        <button className="bg-yellow-600 hover:bg-yellow-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-colors duration-200">
+        <button
+          onClick={() => navigate(`/admin/employees/edit/${employee._id}`)} // Navigate to edit route
+          className="bg-yellow-600 hover:bg-yellow-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-colors duration-200"
+        >
           Edit
         </button>
-        <button className="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-colors duration-200">
+        <button
+          onClick={() => onDelete(employee._id)}
+          className="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-colors duration-200"
+        >
           Delete
         </button>
       </div>

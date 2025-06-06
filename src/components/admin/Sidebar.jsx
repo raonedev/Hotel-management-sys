@@ -10,7 +10,6 @@ const Sidebar = () => {
     { name: "Rooms", path: "/admin/rooms" },
     { name: "Employees", path: "/admin/employees" },
     { name: "Salaries", path: "/admin/salaries" },
-    { name: "Settings", path: "/admin/settings" }, // Added a settings link as an example
   ];
 
   return (
