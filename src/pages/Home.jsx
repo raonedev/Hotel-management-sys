@@ -88,7 +88,7 @@ const Home = () => {
     console.log(`User Role: ${userRole}`); // Log the user role for debugging
     if (userRole === "admin") {
       // Redirect to AdminPanel screen
-      window.location.href = "/admin-panel"; // This will navigate the browser
+      window.location.href = "/admin"; // This will navigate the browser
       return; // Stop further execution of this effect
     }
 
