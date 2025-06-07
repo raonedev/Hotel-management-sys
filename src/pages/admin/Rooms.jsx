@@ -29,7 +29,7 @@ function Rooms() {
     setIsLoggedIn(true); // Set login status
 
     try {
-      const res = await axios.get("http://localhost:3000/api/rooms", {
+      const res = await axios.get("https://hotel-management-sys-backend-production.up.railway.app/api/rooms", {
         headers: {
           Authorization: `Bearer ${jwtToken}`,
         },
@@ -72,7 +72,7 @@ function Rooms() {
     }
 
     try {
-      await axios.delete(`http://localhost:3000/api/rooms/${roomId}`, {
+      await axios.delete(`https://hotel-management-sys-backend-production.up.railway.app/api/rooms/${roomId}`, {
         headers: {
           Authorization: `Bearer ${jwtToken}`,
         },

@@ -49,7 +49,7 @@ const AddRoom = () => {
         setSubmitSuccess(false); // Clear any previous submit success messages
 
         try {
-          const res = await axios.get(`http://localhost:3000/api/rooms/${roomId}`, {
+          const res = await axios.get(`https://hotel-management-sys-backend-production.up.railway.app/api/rooms/${roomId}`, {
             headers: {
               Authorization: `Bearer ${jwtToken}`,
             },
@@ -154,7 +154,7 @@ const AddRoom = () => {
         // If ID exists, it's an EDIT (PUT request)
         // Ensure the _id is also in the payload if your PUT API requires it, although generally not needed for path param.
         const editPayload = { ...payload, _id: roomId };
-        res = await axios.put(`http://localhost:3000/api/rooms/${roomId}`, editPayload, {
+        res = await axios.put(`https://hotel-management-sys-backend-production.up.railway.app/api/rooms/${roomId}`, editPayload, {
           headers: {
             Authorization: `Bearer ${jwtToken}`,
             'Content-Type': 'application/json',
@@ -162,7 +162,7 @@ const AddRoom = () => {
         });
       } else {
         // If no ID, it's an ADD (POST request)
-        res = await axios.post('http://localhost:3000/api/rooms', payload, {
+        res = await axios.post('https://hotel-management-sys-backend-production.up.railway.app/api/rooms', payload, {
           headers: {
             Authorization: `Bearer ${jwtToken}`,
             'Content-Type': 'application/json',

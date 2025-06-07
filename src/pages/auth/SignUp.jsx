@@ -40,7 +40,7 @@ const Signup = () => {
       setLoading(true); // Set loading to true
       try {
         const role = isAdmin ? "admin" : "user";
-        const response = await fetch("http://localhost:3000/api/user/signup", {
+        const response = await fetch("https://hotel-management-sys-backend-production.up.railway.app/api/user/signup", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

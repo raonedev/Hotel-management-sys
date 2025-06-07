@@ -24,7 +24,7 @@ const RoomDetailScreen = () => {
         }
 
         // Fetch individual room details from the backend
-        const response = await fetch(`http://localhost:3000/api/rooms/${id}`, {
+        const response = await fetch(`https://hotel-management-sys-backend-production.up.railway.app/api/rooms/${id}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

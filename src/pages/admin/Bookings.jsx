@@ -24,7 +24,7 @@ const Booking = () => {
           return;
         }
 
-        const res = await axios.get("http://localhost:3000/api/booking", {
+        const res = await axios.get("https://hotel-management-sys-backend-production.up.railway.app/api/booking", {
           headers: {
             Authorization: `Bearer ${jwtToken}`, // Pass the JWT token in the Authorization header
           },

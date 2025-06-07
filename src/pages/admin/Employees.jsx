@@ -27,7 +27,7 @@ const Employees = () => {
     }
 
     try {
-      const res = await axios.get('http://localhost:3000/api/epmloyee', {
+      const res = await axios.get('https://hotel-management-sys-backend-production.up.railway.app/api/epmloyee', {
         headers: {
           Authorization: `Bearer ${jwtToken}`,
         },
@@ -71,10 +71,10 @@ const Employees = () => {
 
     try {
       // Corrected URL to match the provided structure for employee deletion
-      // Assuming employee deletion API is http://localhost:3000/api/epmloyee/:id
-      console.log(`http://localhost:3000/api/epmloyee/${employeeId}`);
+      // Assuming employee deletion API is https://hotel-management-sys-backend-production.up.railway.app/api/epmloyee/:id
+      console.log(`https://hotel-management-sys-backend-production.up.railway.app/api/epmloyee/${employeeId}`);
       console.log(`Bearer ${jwtToken}`);
-      await axios.delete(`http://localhost:3000/api/epmloyee/${employeeId}`, {
+      await axios.delete(`https://hotel-management-sys-backend-production.up.railway.app/api/epmloyee/${employeeId}`, {
         headers: {
           Authorization: `Bearer ${jwtToken}`,
         },

@@ -126,7 +126,7 @@ const RoomBookingPage = () => {
         }
 
         // Make a GET request to your backend API
-        const response = await fetch('http://localhost:3000/api/rooms', {
+        const response = await fetch('https://hotel-management-sys-backend-production.up.railway.app/api/rooms', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

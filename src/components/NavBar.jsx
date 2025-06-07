@@ -11,6 +11,7 @@ const Navbar = ({ isLoggedIn }) => {
     localStorage.removeItem("userRole");
     // Navigate to home page after logout
     navigate('/');
+    window.location.reload();
   };
 
   return (
