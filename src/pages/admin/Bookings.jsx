@@ -74,9 +74,15 @@ const Booking = () => {
                     >
                       <h3 className="text-2xl font-bold text-blue-400 mb-4">Booking ID: {booking._id.substring(0, 8)}...</h3>
                       <div className="space-y-3 text-gray-300 text-lg">
-                        <p>
-                          <span className="font-semibold text-white">Room:</span> {booking.room.name} ({booking.room.category}) - ${booking.room.price}/night
-                        </p>
+                        {booking.room ? (
+                          <p>
+                            <span className="font-semibold text-white">Room:</span> {booking.room.name} ({booking.room.category}) - ${booking.room.price}/night
+                          </p>
+                        ) : (
+                          <p className="text-red-400">
+                            <span className="font-semibold text-white">Room:</span> Not available
+                          </p>
+                        )}
                         <p>
                           <span className="font-semibold text-white">Guest Name:</span> {booking.guestName}
                         </p>
@@ -116,7 +122,7 @@ const Booking = () => {
                           Booked on: {format(parseISO(booking.createdAt), 'PPP p')}
                         </p>
                       </div>
-                      
+
                     </div>
                   ))}
                 </div>
