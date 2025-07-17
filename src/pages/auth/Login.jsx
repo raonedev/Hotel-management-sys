@@ -30,7 +30,7 @@ const Login = () => {
     if (validate()) {
       setLoading(true); // Set loading to true
       try {
-        const response = await fetch("https://hotel-management-sys-backend-production.up.railway.app/api/user/login", {
+        const response = await fetch("https://hotel-management-sys-backend.vercel.app/api/user/login", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

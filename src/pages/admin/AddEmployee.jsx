@@ -49,7 +49,7 @@ const AddEmployee = () => {
         setSubmitSuccess(false); // Clear any previous submit success messages
 
         try {
-          const res = await axios.get(`https://hotel-management-sys-backend-production.up.railway.app/api/epmloyee/${id}`, {
+          const res = await axios.get(`https://hotel-management-sys-backend.vercel.app/api/epmloyee/${id}`, {
             headers: {
               Authorization: `Bearer ${jwtToken}`,
             },
@@ -134,7 +134,7 @@ const AddEmployee = () => {
         // If ID exists, it's an EDIT (PUT request)
         // Ensure the _id is also in the payload if your PUT API requires it
         const editPayload = { ...payload, _id: id };
-        res = await axios.put(`https://hotel-management-sys-backend-production.up.railway.app/api/epmloyee/${id}`, editPayload, {
+        res = await axios.put(`https://hotel-management-sys-backend.vercel.app/api/epmloyee/${id}`, editPayload, {
           headers: {
             Authorization: `Bearer ${jwtToken}`,
             'Content-Type': 'application/json',
@@ -142,7 +142,7 @@ const AddEmployee = () => {
         });
       } else {
         // If no ID, it's an ADD (POST request)
-        res = await axios.post('https://hotel-management-sys-backend-production.up.railway.app/api/epmloyee', payload, {
+        res = await axios.post('https://hotel-management-sys-backend.vercel.app/api/epmloyee', payload, {
           headers: {
             Authorization: `Bearer ${jwtToken}`,
             'Content-Type': 'application/json',

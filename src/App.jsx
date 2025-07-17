@@ -22,7 +22,6 @@ function App() {
 
   return (
     <>
-      <h1></h1>
       <Routes>
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Signup />} />
@@ -35,16 +34,12 @@ function App() {
         {/* Admin Routes */}
         <Route path="/admin" element={<Dashboard />} />
         <Route path="/admin/bookings" element={<Bookings />} />
-
-
         <Route path="/admin/rooms" element={<Rooms />} /> {/* Route for viewing all rooms */}
         <Route path="/admin/rooms/add" element={<AddRoom />} /> {/* NEW Route for adding new room */}
-        <Route path="/admin/rooms/edit/:id" element={<AddRoom />} /> {/* NEW Route for editing existing room */}
-        
+        <Route path="/admin/rooms/edit/:id" element={<AddRoom />} /> {/* NEW Route for editing existing room */}     
         <Route path="/admin/employees" element={<Employees />} />
         <Route path="/admin/employees/add" element={<AddEmployee />}/>
         <Route path="/admin/employees/edit/:id" element={<AddEmployee />} />
-        
         <Route path="/admin/salaries" element={<Salaries />} />
         <Route path="/admin/salaries/add" element={<AddSalary />} /> {/* Route for adding new salary */}
         <Route path="/admin/salaries/edit/:id" element={<AddSalary />} /> {/* Route for editing existing salary */}

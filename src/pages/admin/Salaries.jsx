@@ -30,7 +30,7 @@ const Salaries = () => {
     }
 
     try {
-      const res = await axios.get('https://hotel-management-sys-backend-production.up.railway.app/api/salary', {
+      const res = await axios.get('https://hotel-management-sys-backend.vercel.app/api/salary', {
         headers: {
           Authorization: `Bearer ${jwtToken}`,
         },
@@ -74,7 +74,7 @@ const Salaries = () => {
     }
 
     try {
-      await axios.delete(`https://hotel-management-sys-backend-production.up.railway.app/api/salary/${salaryId}`, {
+      await axios.delete(`https://hotel-management-sys-backend.vercel.app/api/salary/${salaryId}`, {
         headers: {
           Authorization: `Bearer ${jwtToken}`,
         },

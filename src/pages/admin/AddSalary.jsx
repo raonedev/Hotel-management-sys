@@ -44,7 +44,7 @@ const AddSalary = () => {
       }
 
       try {
-        const res = await axios.get('https://hotel-management-sys-backend-production.up.railway.app/api/epmloyee', {
+        const res = await axios.get('https://hotel-management-sys-backend.vercel.app/api/epmloyee', {
           headers: { Authorization: `Bearer ${jwtToken}` },
         });
         setEmployees(res.data);
@@ -80,7 +80,7 @@ const AddSalary = () => {
         setSubmitSuccess(false);
 
         try {
-          const res = await axios.get(`https://hotel-management-sys-backend-production.up.railway.app/api/salary/${salaryId}`, {
+          const res = await axios.get(`https://hotel-management-sys-backend.vercel.app/api/salary/${salaryId}`, {
             headers: { Authorization: `Bearer ${jwtToken}` },
           });
           const salaryData = res.data;
@@ -150,7 +150,7 @@ const AddSalary = () => {
       if (salaryId) {
         // If salaryId exists, it's an EDIT (PUT request)
         const editPayload = { ...payload, _id: salaryId }; // Include _id in payload as per example
-        res = await axios.put(`https://hotel-management-sys-backend-production.up.railway.app/api/salary/${salaryId}`, editPayload, {
+        res = await axios.put(`https://hotel-management-sys-backend.vercel.app/api/salary/${salaryId}`, editPayload, {
           headers: {
             Authorization: `Bearer ${jwtToken}`,
             'Content-Type': 'application/json',
@@ -158,7 +158,7 @@ const AddSalary = () => {
         });
       } else {
         // If no salaryId, it's an ADD (POST request)
-        res = await axios.post('https://hotel-management-sys-backend-production.up.railway.app/api/salary', payload, {
+        res = await axios.post('https://hotel-management-sys-backend.vercel.app/api/salary', payload, {
           headers: {
             Authorization: `Bearer ${jwtToken}`,
             'Content-Type': 'application/json',

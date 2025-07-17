@@ -76,7 +76,7 @@ const RoomBookingForm = () => {
         try {
             console.log('1');
             console.log(token);
-            const response = await fetch('https://hotel-management-sys-backend-production.up.railway.app/api/booking', {
+            const response = await fetch('https://hotel-management-sys-backend.vercel.app/api/booking', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

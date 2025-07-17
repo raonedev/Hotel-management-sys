@@ -7,7 +7,7 @@ import ReactMarkdown from "react-markdown"; // For rendering markdown in AI resp
 const askGemini = async (userMessage, exerciseName) => {
   // API_KEY should be an empty string in the Canvas environment.
   // Canvas will automatically provide the API key at runtime for allowed models.
-  const apiKey = "";
+  const apiKey = import.meta.env.VITE_GEMINI_KEY;
   const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
   // System prompt to guide the AI's behavior
