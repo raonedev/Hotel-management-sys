@@ -4,7 +4,7 @@ import { Autoplay } from "swiper/modules";
 import "swiper/css"; // Ensure Swiper's basic CSS is imported
 // Assuming Navbar is in "../components/NavBar" and correctly styled for dark mode
 import Navbar from "../components/NavBar";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 // Data for the hero carousel slides
 const slides = [
@@ -81,14 +81,14 @@ const testimonials = [
 
 const Home = () => {
    const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Check for user role and redirect if admin
     const userRole = localStorage.getItem("userRole");
     console.log(`User Role: ${userRole}`); // Log the user role for debugging
     if (userRole === "admin") {
-      // Redirect to AdminPanel screen
-      window.location.href = "/admin"; // This will navigate the browser
+      navigate("/admin"); // Use navigate instead of window.location.href
       return; // Stop further execution of this effect
     }
 
