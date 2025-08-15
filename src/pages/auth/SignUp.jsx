@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import HeroImage from "../../assets/Hero.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate  } from "react-router-dom";
 
 const Signup = () => {
   const [username, setUsername] = useState(""); // Added username state
