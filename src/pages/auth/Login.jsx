@@ -1,6 +1,6 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import HeroImage from "../../assets/Hero.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -8,6 +8,9 @@ const Login = () => {
   const [errors, setErrors] = useState({});
   const [apiMessage, setApiMessage] = useState(""); // State for API success/error messages
   const [loading, setLoading] = useState(false); // State for loading indicator
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const navigate = useNavigate(); // Initialize useNavigate hook
 
   const validate = () => {
     const newErrors = {};
@@ -18,7 +21,7 @@ const Login = () => {
 
     if (!password) newErrors.password = "Password is required";
     else if (password.length < 6)
-      newErrors.password = "Password must be at least 6 characters"; // Assuming a minimum password length for validation
+      newErrors.password = "Password must be at least 6 characters";
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -47,9 +50,9 @@ const Login = () => {
           // Store JWT and role in local storage
           localStorage.setItem("jwtToken", data.token);
           localStorage.setItem("userRole", data.role);
-          // Optionally, redirect the user after a short delay
+          // Redirect the user after a short delay
           setTimeout(() => {
-            window.location.href = "/"; // Or use navigate from react-router-dom
+            navigate("/"); // Use navigate instead of window.location.href
           }, 1500);
         } else {
           // Login failed
@@ -65,30 +68,26 @@ const Login = () => {
     }
   };
 
-   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  
-    useEffect(() => {
-      // Check for user role and redirect if admin
-      const userRole = localStorage.getItem("userRole");
-      console.log(`User Role: ${userRole}`); // Log the user role for debugging
-      if (userRole === "admin") {
-        // Redirect to AdminPanel screen
-        window.location.href = "/admin"; // This will navigate the browser
-        return; // Stop further execution of this effect
-      }else if (userRole === "user") {
-        // Redirect to User Dashboard screen
-        window.location.href = "/"; // This will navigate the browser
+  useEffect(() => {
+    // Check for user role and redirect if admin or user
+    const userRole = localStorage.getItem("userRole");
+    console.log(`User Role: ${userRole}`); // Log the user role for debugging
+    if (userRole === "admin") {
+      navigate("/admin"); // Use navigate instead of window.location.href
+      return; // Stop further execution of this effect
+    } else if (userRole === "user") {
+      navigate("/"); // Use navigate instead of window.location.href
+      return;
+    }
 
-      }
-  
-      // Check for JWT token to determine login status
-      const jwtToken = localStorage.getItem("jwtToken");
-      if (jwtToken) {
-        setIsLoggedIn(true);
-      } else {
-        setIsLoggedIn(false);
-      }
-    }, []); 
+    // Check for JWT token to determine login status
+    const jwtToken = localStorage.getItem("jwtToken");
+    if (jwtToken) {
+      setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
+    }
+  }, [navigate]); // Add navigate to dependency array
 
   return (
     // Main container with dark background and Inter font
@@ -98,8 +97,11 @@ const Login = () => {
         <img
           src={HeroImage}
           alt="Login Cover"
-          className="w-full h-full object-cover rounded-r-2xl shadow-lg" // Added rounded corners and shadow
-          onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/800x1000/1F2937/D1D5DB?text=Login+Image+Not+Found"; }}
+          className="w-full h-full object-cover rounded-r-2xl shadow-lg"
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src = "https://placehold.co/800x1000/1F2937/D1D5DB?text=Login+Image+Not+Found";
+          }}
         />
       </div>
 
@@ -123,9 +125,7 @@ const Login = () => {
               placeholder="you@example.com"
             />
             {errors.email && (
-              <p className="text-red-400 text-sm text-left mt-2">
-                {errors.email}
-              </p>
+              <p className="text-red-400 text-sm text-left mt-2">{errors.email}</p>
             )}
           </div>
 
@@ -141,9 +141,7 @@ const Login = () => {
               placeholder="••••••••"
             />
             {errors.password && (
-              <p className="text-red-400 text-sm text-left mt-2">
-                {errors.password}
-              </p>
+              <p className="text-red-400 text-sm text-left mt-2">{errors.password}</p>
             )}
           </div>
 
@@ -163,7 +161,7 @@ const Login = () => {
                        focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75
                        transform hover:-translate-y-0.5
                        disabled:opacity-50 disabled:cursor-not-allowed"
-            disabled={loading} // Disable button when loading
+            disabled={loading}
           >
             {loading ? "Logging In..." : "Login"}
           </button>
@@ -171,10 +169,9 @@ const Login = () => {
           {/* Signup link */}
           <p className="text-center text-sm text-gray-400 mt-4">
             Don’t have an account?{" "}
-            {/* Replaced Link with a regular anchor tag for sandbox compatibility */}
-            <a href="/signup" className="text-blue-400 hover:text-blue-300 underline font-medium transition duration-200">
+            <Link to="/signup" className="text-blue-400 hover:text-blue-300 underline font-medium transition duration-200">
               Signup
-            </a>
+            </Link>
           </p>
         </form>
       </div>
