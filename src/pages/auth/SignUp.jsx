@@ -11,6 +11,7 @@ const Signup = () => {
   const [errors, setErrors] = useState({});
   const [apiMessage, setApiMessage] = useState(""); // State for API success/error messages
   const [loading, setLoading] = useState(false); // State for loading indicator
+  const navigate = useNavigate();
 
    const validate = () => {
     const newErrors = {};
@@ -58,9 +59,9 @@ const Signup = () => {
           localStorage.setItem("jwtToken", data.token);
           localStorage.setItem("userRole", data.role);
           // Optionally, redirect the user after a short delay
-          // setTimeout(() => {
-          //   window.location.href = "/login"; // Or use navigate from react-router-dom
-          // }, 1500);
+          setTimeout(() => {
+      navigate("/login");
+    }, 1500);
         } else {
           // Signup failed
           console.error("Signup failed:", data.message || "Something went wrong");
@@ -209,9 +210,9 @@ const Signup = () => {
           <p className="text-center text-sm text-gray-400 mt-4">
             Already have an account?{" "}
             {/* Replaced Link with a regular anchor tag for sandbox compatibility */}
-            <a href="/login" className="text-blue-400 hover:text-blue-300 underline font-medium transition duration-200">
-              Login
-            </a>
+            <Link to="/login" className="text-blue-400 hover:text-blue-300 underline font-medium transition duration-200">
+    Login
+  </Link>
           </p>
         </form>
       </div>
