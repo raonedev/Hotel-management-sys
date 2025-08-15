@@ -33,19 +33,19 @@ const featuredRooms = [
   {
     id: 1,
     title: 'Deluxe Room',
-    image: 'https://images.unsplash.com/photo-1582719478280-fd86f4a81381?auto=format&fit=crop&w=2940&q=80',
+    image: 'https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?auto=format&fit=crop&w=2560&q=80',
     description: 'Spacious and elegant, offering premium comfort and amenities.'
   },
   {
     id: 2,
     title: 'Executive Suite',
-    image: 'https://images.unsplash.com/photo-1596394348231-c918a000412e?auto=format&fit=crop&w=2940&q=80',
+    image: 'https://images.unsplash.com/photo-1493246507139-91e8fad9978e?auto=format&fit=crop&w=2940&q=80',
     description: 'Indulge in luxury with breathtaking views and exclusive services.'
   },
   {
     id: 3,
     title: 'Presidential Suite',
-    image: 'https://images.unsplash.com/photo-1621376885376-e17f8a798991?auto=format&fit=crop&w=2940&q=80',
+    image: 'https://images.unsplash.com/photo-1518623489648-a173ef7824f3?auto=format&fit=crop&w=2762&q=80',
     description: 'The pinnacle of luxury, designed for an unparalleled experience.'
   },
 ];
